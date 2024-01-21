@@ -28,11 +28,5 @@ namespace nstrWeatherBot_gen2.ApiControllers
 
             await _updateDistributor.GetUpdate(update);
         }
-
-        [HttpGet]
-        public IActionResult Get()
-        {
-            return View();
-        }
     }
 }
