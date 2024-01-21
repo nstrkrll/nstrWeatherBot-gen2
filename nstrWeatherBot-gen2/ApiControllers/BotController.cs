@@ -9,12 +9,10 @@ namespace nstrWeatherBot_gen2.ApiControllers
     [ApiController]
     public class BotController : Controller
     {
-        private TelegramBotClient _bot;
         private TelegramBotUpdateDistributor<TelegramBotCommandExecutor> _updateDistributor;
 
         public BotController()
         {
-            _bot = TelegramBot.GetTelegramBot();
             _updateDistributor = new TelegramBotUpdateDistributor<TelegramBotCommandExecutor>();
         }
 
