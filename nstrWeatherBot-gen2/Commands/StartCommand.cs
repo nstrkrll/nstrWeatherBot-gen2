@@ -20,7 +20,7 @@ namespace nstrWeatherBot_gen2.Commands
                 (
                     chatId: chatId,
                     text: $"Привет\\, *\\@{username}*\\!\n" +
-                        $"\nЯ погодный бот\\.\n" +
+                        $"\nЯ \\- погодный бот\\.\n" +
                         $"Отправь мне название населенного пункта\\, прогноз погоды которого хочешь узнать\\.",
                     parseMode: ParseMode.MarkdownV2
                  );
