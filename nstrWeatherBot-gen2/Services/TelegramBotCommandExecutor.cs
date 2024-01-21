@@ -6,31 +6,38 @@ namespace nstrWeatherBot_gen2.Services
 {
     public class TelegramBotCommandExecutor : ITelegramUpdateListener
     {
-        private List<ICommand> _commands;
+        private List<ICommand> _commonCommands;
+        private WeatherCommand _weatherCommand;
 
         public TelegramBotCommandExecutor()
         {
-            _commands = new List<ICommand>()
+            _commonCommands = new List<ICommand>()
             {
-                new StartCommand()
+                new StartCommand(),
+                new HelpCommand(),
             };
+
+            _weatherCommand = new WeatherCommand();
         }
 
         public async Task GetUpdate(Update update)
         {
-            Message message = update.Message;
+            var message = update.Message;
             if (message.Text == null)
             {
                 return;
             }
 
-            foreach (var command in _commands)
+            foreach (var command in _commonCommands)
             {
                 if (command.Name.Equals(message.Text.Trim()))
                 {
                     await command.Execute(update);
+                    return;
                 }
             }
+
+            await _weatherCommand.Execute(update);
         }
     }
 }

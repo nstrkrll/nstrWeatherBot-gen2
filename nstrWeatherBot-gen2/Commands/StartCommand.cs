@@ -2,6 +2,7 @@
 using Telegram.Bot;
 using nstrWeatherBot_gen2.Interfaces;
 using nstrWeatherBot_gen2.Services;
+using Telegram.Bot.Types.Enums;
 
 namespace nstrWeatherBot_gen2.Commands
 {
@@ -15,7 +16,14 @@ namespace nstrWeatherBot_gen2.Commands
         {
             long chatId = update.Message.Chat.Id;
             string username = update.Message.Chat.Username;
-            await Client.SendTextMessageAsync(chatId, $"Привет, {username}! Я погодный бот.\nОтправь мне название города, для которого хочешь узнать погоду.");
+            await Client.SendTextMessageAsync
+                (
+                    chatId: chatId,
+                    text: $"Привет\\, *\\@{username}*\\!\n" +
+                        $"\nЯ погодный бот\\.\n" +
+                        $"Отправь мне название населенного пункта\\, прогноз погоды которого хочешь узнать\\.",
+                    parseMode: ParseMode.MarkdownV2
+                 );
         }
     }
 }

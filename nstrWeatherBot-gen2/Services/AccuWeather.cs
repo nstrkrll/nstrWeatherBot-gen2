@@ -33,7 +33,6 @@ namespace nstrWeatherBot_gen2.Services
             }
             catch (Exception ex)
             {
-                Console.WriteLine("\n!!!---WARNING---!!!\nError:\n" + ex.Message + "\nType: " + ex.GetType() + "\nStack trace:\n" + ex.StackTrace + "\n============\n");
                 return "Не удалось отобразить погоду в запрашиваемой точке.\nОбратитесь к администратору: @nstrkrll";
             }
         }
