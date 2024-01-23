@@ -1,32 +1,38 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using nstrWeatherBot_gen2.Models;
-using System.Diagnostics;
+using nstrWeatherBot_gen2.Repositories;
 
 namespace nstrWeatherBot_gen2.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ApiKeysRepository _repository;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ApiKeysRepository repository) 
         {
-            _logger = logger;
+            _repository = repository;
         }
 
-        public IActionResult Index()
+        public ActionResult Index()
         {
-            return View();
+            ApiKeys apiInstance = _repository.Get(1);
+            return View(apiInstance);
         }
 
-        public IActionResult Privacy()
+        [HttpPost]
+        public ActionResult Index(ApiKeys newApi)
         {
-            return View();
-        }
+            ApiKeys apiInstance = _repository.Get(1);
+            if (ModelState.IsValid)
+            {
+                apiInstance.KeyString = newApi.KeyString;
+                _repository.Update(apiInstance);
+                return RedirectToAction("Index");
+            }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(newApi);
         }
     }
 }
