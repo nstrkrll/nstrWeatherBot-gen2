@@ -28,7 +28,7 @@ namespace nstrWeatherBot_gen2.Services
             {
                 if (_client == null)
                 {
-                    _client = new AccuWeather("vI0w0LvYwDoXYvrurlRWviCWeB6uySVQ");
+                    _client = new AccuWeather("");
                 }
 
                 return _client;

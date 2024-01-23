@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using nstrWeatherBot_gen2.Services;
-using Telegram.Bot;
 using Telegram.Bot.Types;
 
 namespace nstrWeatherBot_gen2.ApiControllers
