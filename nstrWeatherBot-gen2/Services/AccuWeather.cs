@@ -6,13 +6,33 @@ namespace nstrWeatherBot_gen2.Services
 {
     public class AccuWeather
     {
+        private static AccuWeather _client { get; set; }
         private string _apiKey;
         private HttpClient _httpClient;
+        private static object _lock = new object();
 
-        public AccuWeather(string apiKey)
+        public string ApiKey
+        {
+            set => _apiKey = value;
+        }
+
+        private AccuWeather(string apiKey)
         {
             _apiKey = apiKey;
             _httpClient = new HttpClient();
+        }
+
+        public static AccuWeather GetWeatherClient()
+        {
+            lock (_lock)
+            {
+                if (_client == null)
+                {
+                    _client = new AccuWeather("vI0w0LvYwDoXYvrurlRWviCWeB6uySVQ");
+                }
+
+                return _client;
+            }
         }
 
         public string GetWeatherInfo(string CityName)

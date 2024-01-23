@@ -17,7 +17,7 @@ namespace nstrWeatherBot_gen2.Commands
             await Client.SendTextMessageAsync
             (
                 chatId: chatId,
-                text: WeatherService.GetWeatherClient().GetWeatherInfo(update.Message.Text)
+                text: AccuWeather.GetWeatherClient().GetWeatherInfo(update.Message.Text)
             );
         }
     }
