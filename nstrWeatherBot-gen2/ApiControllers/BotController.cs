@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using nstrWeatherBot_gen2.Repositories;
 using nstrWeatherBot_gen2.Services;
 using Telegram.Bot.Types;
 
@@ -10,9 +11,14 @@ namespace nstrWeatherBot_gen2.ApiControllers
     {
         private TelegramBotUpdateDistributor<TelegramBotCommandExecutor> _updateDistributor;
 
-        public BotController()
+        public BotController(ApiKeysRepository repository)
         {
             _updateDistributor = new TelegramBotUpdateDistributor<TelegramBotCommandExecutor>();
+            var weatherService = AccuWeather.GetWeatherClient();
+            if (string.IsNullOrEmpty(weatherService.ApiKey))
+            {
+                weatherService.ApiKey = repository.Get(1).KeyString;
+            }
         }
 
         [HttpPost]

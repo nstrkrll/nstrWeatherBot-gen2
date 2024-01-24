@@ -13,12 +13,12 @@ namespace nstrWeatherBot_gen2.Services
 
         public string ApiKey
         {
+            get { return _apiKey; }
             set => _apiKey = value;
         }
 
-        private AccuWeather(string apiKey)
+        private AccuWeather()
         {
-            _apiKey = apiKey;
             _httpClient = new HttpClient();
         }
 
@@ -28,7 +28,7 @@ namespace nstrWeatherBot_gen2.Services
             {
                 if (_client == null)
                 {
-                    _client = new AccuWeather("");
+                    _client = new AccuWeather();
                 }
 
                 return _client;
